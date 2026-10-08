@@ -1,0 +1,34 @@
+{
+  "name": "native-camera-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A cross-platform desktop camera recorder with manual webcam controls.",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac --win --linux",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
+  },
+  "devDependencies": {
+    "electron": "^38.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.codex.nativecameradesktop",
+    "productName": "Native Camera Desktop",
+    "files": ["main.cjs", "native-camera-desktop.html", "package.json"],
+    "directories": { "output": "release" },
+    "mac": {
+      "category": "public.app-category.video",
+      "target": ["dmg", "zip"],
+      "extendInfo": {
+        "NSCameraUsageDescription": "Native Camera uses your camera to show a live preview and record video.",
+        "NSMicrophoneUsageDescription": "Native Camera uses your selected microphone when you record video with audio."
+      }
+    },
+    "win": { "target": ["nsis", "portable"] },
+    "linux": { "category": "AudioVideo;Video", "target": ["AppImage", "deb"] }
+  }
+}
